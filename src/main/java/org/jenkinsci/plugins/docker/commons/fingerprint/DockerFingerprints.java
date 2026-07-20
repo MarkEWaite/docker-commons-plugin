@@ -38,7 +38,6 @@ import java.util.logging.Logger;
 import edu.umd.cs.findbugs.annotations.CheckForNull;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import jenkins.model.FingerprintFacet;
-import org.apache.commons.lang.StringUtils;
 
 /**
  * Entry point into fingerprint related functionalities in Docker.
@@ -139,7 +138,7 @@ public class DockerFingerprints {
     
     private static @NonNull Fingerprint forDockerInstance(@CheckForNull Run<?,?> run, 
             @NonNull String id, @CheckForNull String name, @NonNull String prefix) throws IOException {
-        final String imageName = prefix + (StringUtils.isNotBlank(name) ? name : id);
+        final String imageName = prefix + (name !=null && !name.isBlank() ? name : id);
         return Jenkins.get().getFingerprintMap().getOrCreate(run, imageName, getFingerprintHash(id));
     }
 
