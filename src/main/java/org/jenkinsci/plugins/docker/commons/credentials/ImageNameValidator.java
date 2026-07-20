@@ -58,7 +58,7 @@ public class ImageNameValidator {
      */
     public static @NonNull String[] splitUserAndRepo(@CheckForNull String userAndRepo) {
         String[] args = new String[4];
-        if (userAndRepo ==null || userAndRepo.isEmpty()) {
+        if (userAndRepo == null || userAndRepo.isEmpty()) {
             return args;
         }
         int slashIdx = userAndRepo.lastIndexOf('/');
