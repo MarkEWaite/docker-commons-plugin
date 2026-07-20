@@ -26,7 +26,6 @@ package org.jenkinsci.plugins.docker.commons.credentials;
 import edu.umd.cs.findbugs.annotations.CheckForNull;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.util.FormValidation;
-import org.apache.commons.lang.StringUtils;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -59,7 +58,7 @@ public class ImageNameValidator {
      */
     public static @NonNull String[] splitUserAndRepo(@NonNull String userAndRepo) {
         String[] args = new String[4];
-        if (StringUtils.isEmpty(userAndRepo)) {
+        if (userAndRepo.isEmpty()) {
             return args;
         }
         int slashIdx = userAndRepo.lastIndexOf('/');
@@ -108,8 +107,10 @@ public class ImageNameValidator {
             return FormValidation.ok();
         }
         final String[] args = splitUserAndRepo(userAndRepo);
-        if (StringUtils.isBlank(args[0]) && StringUtils.isBlank(args[1]) && StringUtils.isBlank(args[2])
-                && StringUtils.isBlank(args[3])) {
+        if ((args[0] == null || args[0].isBlank())
+                && (args[1] == null || args[1].isBlank())
+                && (args[2] == null || args[2].isBlank())
+                && (args[3] == null || args[3].isBlank())) {
             return FormValidation.error("Bad imageName format: %s", userAndRepo);
         }
         final FormValidation name = validateName(args[1]);
@@ -181,7 +182,7 @@ public class ImageNameValidator {
         if (SKIP) {
             return FormValidation.ok();
         }
-        if (StringUtils.isEmpty(digest)) {
+        if (digest == null || digest.isEmpty()) {
             return FormValidation.ok();
         }
         if (digest.startsWith("@sha256")) { 
@@ -232,7 +233,7 @@ public class ImageNameValidator {
         if (SKIP) {
             return FormValidation.ok();
         }
-        if (StringUtils.isEmpty(tag)) {
+        if (tag == null || tag.isEmpty()) {
             return FormValidation.ok();
         }
         if (tag.length() > 128) {
@@ -280,7 +281,7 @@ public class ImageNameValidator {
         if (SKIP) {
             return FormValidation.ok();
         }
-        if (StringUtils.isEmpty(name)) {
+        if (name == null || name.isEmpty()) {
             return FormValidation.error("Missing name.");
         }
         if (VALID_NAME_COMPONENT.matcher(name).matches()) {

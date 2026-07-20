@@ -30,7 +30,6 @@ import java.nio.charset.StandardCharsets;
 
 import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import org.apache.commons.lang.StringUtils;
 import org.jenkinsci.plugins.docker.commons.credentials.KeyMaterial;
 import org.jenkinsci.plugins.docker.commons.credentials.KeyMaterialFactory;
 import org.kohsuke.accmod.Restricted;
@@ -83,7 +82,7 @@ public class RegistryKeyMaterialFactory extends KeyMaterialFactory {
         FilePath configJsonPath = FilePath.getHomeDirectory(this.launcher.getChannel()).child(".docker").child(DOCKER_CONFIG_FILENAME);
         if (configJsonPath.exists()) {
             String configJson = configJsonPath.readToString();
-            if (StringUtils.isNotBlank(configJson)) {
+            if (!configJson.isBlank()) {
                 launcher.getListener().getLogger().println("Using the existing docker config file.");
 
                 JSONObject json = JSONObject.fromObject(configJson);
