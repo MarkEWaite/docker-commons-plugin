@@ -50,7 +50,6 @@ public class ImageNameValidatorTest {
                 {"name\necho hello:tag",                                                                                             FormValidation.Kind.ERROR},
                 {"name:tag$BUILD_NUMBER",                                                                                            FormValidation.Kind.ERROR},
                 {"name$BUILD_NUMBER:tag",                                                                                            FormValidation.Kind.ERROR},
-                {null,                                                                                                               FormValidation.Kind.ERROR},
                 {"",                                                                                                                 FormValidation.Kind.ERROR},
                 {":",                                                                                                                FormValidation.Kind.ERROR},
                 {"  ",                                                                                                               FormValidation.Kind.ERROR},

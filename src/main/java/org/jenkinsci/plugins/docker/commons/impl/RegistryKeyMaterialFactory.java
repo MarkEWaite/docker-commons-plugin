@@ -82,7 +82,7 @@ public class RegistryKeyMaterialFactory extends KeyMaterialFactory {
         FilePath configJsonPath = FilePath.getHomeDirectory(this.launcher.getChannel()).child(".docker").child(DOCKER_CONFIG_FILENAME);
         if (configJsonPath.exists()) {
             String configJson = configJsonPath.readToString();
-            if (configJson != null && !configJson.isBlank()) {
+            if (!configJson.isBlank()) {
                 launcher.getListener().getLogger().println("Using the existing docker config file.");
 
                 JSONObject json = JSONObject.fromObject(configJson);
