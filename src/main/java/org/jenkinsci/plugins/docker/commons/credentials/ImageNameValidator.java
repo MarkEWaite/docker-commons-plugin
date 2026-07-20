@@ -56,9 +56,9 @@ public class ImageNameValidator {
      * @return an array where position 0 is the namespace, 1 is the name and 2 is the tag and 3 is the digest.
      *         Any position could be <code>null</code>
      */
-    public static @NonNull String[] splitUserAndRepo(@NonNull String userAndRepo) {
+    public static @NonNull String[] splitUserAndRepo(@CheckForNull String userAndRepo) {
         String[] args = new String[4];
-        if (userAndRepo.isEmpty()) {
+        if (userAndRepo ==null || userAndRepo.isEmpty()) {
             return args;
         }
         int slashIdx = userAndRepo.lastIndexOf('/');
